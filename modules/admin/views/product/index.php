@@ -7,15 +7,14 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\admin\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = 'Товары';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,9 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'category_id',
+            //'category_id',
+            [
+                'attribute' => 'category_id',
+                'value' => function($data){
+                    return $data->categories->title;
+                }
+            ],
             'title',
-            'content:ntext',
+            //'content:ntext',
             'price',
             //'old_price',
             //'description',
